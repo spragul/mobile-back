@@ -11,9 +11,9 @@ router.get('/', async function (req, res) {
   try {
     let mobile = await mobileModel.find();
     res.status(200).send({
-      mobile,
-      message:"Users Data Fetch Successfull!"
+      mobile
     })
+    console.log(mobile);
   } catch (error) {
     res.status(500).send({
       message:"Internal Server Error",
