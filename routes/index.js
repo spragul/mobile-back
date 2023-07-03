@@ -4,10 +4,10 @@ var { dbUrl } = require('../dbconfig/dbconfig');
 var mongoose = require('mongoose');
 var router = express.Router();
 mongoose.connect(dbUrl)
-
+const {validate}=require('../dbconfig/auth')
 
 /* GET home page. */
-router.get('/', async function (req, res) {
+router.get('/',validate, async function (req, res) {
   try {
     let mobile = await mobileModel.find();
     res.status(200).send({
@@ -23,7 +23,7 @@ router.get('/', async function (req, res) {
 });
 
 //inset mobile
-router.post('/addmobile', async (req, res) => {
+router.post('/addmobile',validate, async (req, res) => {
   try {
     let mobile = await mobileModel.findOne({ id: req.body.id })
     if (!mobile) {
@@ -40,7 +40,7 @@ router.post('/addmobile', async (req, res) => {
   }
 })
 //update mobile details
-router.put('/mobile/edit/:id', async (req, res) => {
+router.put('/mobile/edit/:id',validate, async (req, res) => {
   try {
     console.log(req.params.id);
     let mobile = await mobileModel.findOne({ id: req.params.id })
@@ -67,7 +67,7 @@ router.put('/mobile/edit/:id', async (req, res) => {
 })
 
 //delete mobile
-router.delete('/mobile/delete/:id', async (req, res) => {
+router.delete('/mobile/delete/:id',validate, async (req, res) => {
   try {
     let mobile = await mobileModel.findOne({ id: req.params.id })
     if (mobile) {
