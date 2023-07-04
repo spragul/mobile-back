@@ -39,7 +39,7 @@ router.post('/login', async (req, res) => {
 
         let user = await userModel.findOne({ email: req.body.email });
         if (user) {
-            timeExpires = '10m'
+            timeExpires = '2h'
             if (await hashCompare(req.body.password, user.password)) {
                 let token = await createToken({
                     name: user.name,
