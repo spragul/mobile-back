@@ -76,7 +76,7 @@ router.post("/forgotpassword", async (req, res) => {
                 id: user._id
             }, timeExpires)
             console.log(token, user._id)
-            const link = `http://localhost:5000/user/resetpassword/${user._id}/${token}`
+            const link = `https://fanciful-hummingbird-57ab9e.netlify.app/user/resetpassword/${user._id}/${token}`
 
             const transporter = nodemailer.createTransport({
                 service: "gmail",
